@@ -1,1 +1,0 @@
-# GU-JS-2-shop-practice

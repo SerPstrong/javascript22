@@ -1,0 +1,9 @@
+.products {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-cart {
+    margin: 0 auto;
+    display: block;
+}
