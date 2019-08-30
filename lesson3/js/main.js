@@ -19,9 +19,16 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 function getRequest(url,cb) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.onload = () => resolve(xhr.responseText);
-    xhr.onerror = () => reject(xhr.statusText);
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status !== 200) {
+          console.log('Error');
+        } else {
+          cb(xhr.responseText);
+        }
+      }
+    };
     xhr.send();
   });
 }
