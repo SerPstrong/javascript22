@@ -8,8 +8,8 @@ Vue.component('products', {
         }
     },
     methods: {
-        filter(){
-            let regexp = new RegExp(this.userSearch, 'i');
+        filter(value){
+            let regexp = new RegExp(value, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
     },
@@ -21,13 +21,6 @@ Vue.component('products', {
                     this.filtered.push(el);
                 }
             });
-        // this.$parent.getJson(`getProducts.json`)
-        //     .then(data => {
-        //         for(let el of data){
-        //             this.products.push(el);
-        //             this.filtered.push(el);
-        //         }
-        //     })
     },
     template: `
         <div class="products">
