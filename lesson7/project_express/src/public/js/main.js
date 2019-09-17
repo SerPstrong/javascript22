@@ -1,15 +1,25 @@
-const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+import cart from './CartComp'
+import products from './ProducComp'
+import search from './FilterComp'
+import error from './ErrorComp'
 
-const app = new Vue({
+const app = {
     el: '#app',
     data: {
         userSearch: '',
+    },
+    components: {
+        cart,
+        products,
+        error,
+        search,
     },
     methods: {
         getJson(url){
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
+                    // console.log(error);
                     this.$refs.error.setError(error);
                 })
         },
@@ -21,9 +31,9 @@ const app = new Vue({
                 },
                 body: JSON.stringify(data)
             }).then(result => result.json())
-              .catch(error => {
-                  this.$refs.error.setError(error);
-              });
+                .catch(error => {
+                    this.$refs.error.setError(error);
+                });
         },
         putJson(url, data) {
             return fetch(url, {
@@ -33,25 +43,23 @@ const app = new Vue({
                 },
                 body: JSON.stringify(data)
             }).then(result => result.json())
-              .catch(error => {
-                  this.$refs.error.setError(error);
-              });
+                .catch(error => {
+                    this.$refs.error.setError(error);
+                });
         },
-        deleteJson(url, data) {
+        deleteJson(url) {
             return fetch(url, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
             }).then(result => result.json())
-              .catch(error => {
-                  this.$refs.error.setError(error);
-              });
+                .catch(error => {
+                    this.$refs.error.setError(error);
+                });
         },
     },
-    mounted() {
-        console.log(this);
-    }
-});
+};
+
+export default app;
 
